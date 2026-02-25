@@ -97,46 +97,6 @@
 			        this.selectionStart = this.selectionEnd = selStart + 1;
 			        e.preventDefault();
 			        break;
-			    case 57:  /* ( */
-			    case 222:  /* ' or " */
-				case 219: /* [  or  { */
-					if (e.altKey || e.ctrlKey) break;
-					if (!e.shiftKey && e.keyCode == 57) break;
-
-					if (e.keyCode == 57) toAdd = '()';
-					else if (e.keyCode == 219) toAdd = e.shiftKey ? '{}' :'[]' ;
-					else if (e.keyCode == 222) {
-						toAdd = e.shiftKey ? '""' : '\'\'';
-						if (selRight[0] == toAdd[0]){
-							this.selectionStart = selStart;
-							this.selectionEnd = selStart + 1;
-							break;
-						} 
-					}
-					
-							
-					if (!(e.keyCode == 222 && selLeft[selLeft.length-1] == toAdd[0] )){ /* exception for quotes */
-				        target.value = value.substring(0, selStart) + toAdd[0] + toAdd[1] + value.substring(this.selectionEnd);
-				        this.selectionStart = this.selectionEnd = selStart + 1;
-				        e.preventDefault();
-					}
-					break;
-
-
-				case 48:  /* ) */
-				case 221:  /* ] or } */
-					if (e.altKey || e.ctrlKey) break;
-					if (!e.shiftKey && e.keyCode == 48) break;
-
-					if (e.keyCode == 48) toAdd = ')';
-					else toAdd = e.shiftKey ? '}' :']' ;
-
-					if (selRight[0] == toAdd){
-						this.selectionStart = selStart;
-						this.selectionEnd = selStart + 1;
-					} 
-					break;
-
 				case 13: /* <enter> */
 					/* Handle indentation */
 					var data = selLeft.split('\n');
@@ -159,14 +119,6 @@
 					break;
 
 
-				case 8:  /* <backspace> */
-					var sr = selRight[0];
-					var sl = selLeft[selLeft.length-1];
-					if (sl+sr== '[]' || sl+sr=='{}' || sl+sr== '()' || sl+sr== '""' || sl+sr== "''"){
-						this.selectionStart = selStart - 1;
-						this.selectionEnd = selStart + 1;
-					}
-					break;
 			}
 	
 			checkTextChange();
