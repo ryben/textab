@@ -1,6 +1,14 @@
 <title>ReyTexTab</title>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#272822">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-title" content="ReyTexTab">
+	<link rel="manifest" href="manifest.json">
+	<link rel="icon" href="t.png">
+	<link rel="apple-touch-icon" href="icon-192.png">
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-5FJPQF2R77"></script>
 	<script>
@@ -10,7 +18,6 @@
 	
 	  gtag('config', 'G-5FJPQF2R77');
 	</script>
-	<link rel="icon" href="t.png">
 </head>
 <textarea spellcheck=false style="outline:none;height:100%;width:100%;border:none;background-color:272822;color:f7f8f2;padding:2rem;font:1.2rem monospace;resize:none;"></textarea>
 <body bgcolor=272822></body>
@@ -148,5 +155,11 @@
 		function closing(e){
 			if (mtext.value != textsave && confirmOnClose != undefined) return "You have unsaved changes.";
 		};
+
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', () => {
+				navigator.serviceWorker.register('./sw.js').catch(() => {});
+			});
+		}
 
 </script>
